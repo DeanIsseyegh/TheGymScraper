@@ -1,6 +1,7 @@
 package com.dean.TheGymScraper.gymdata;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 /**
  * Responsible for conveniently structuring the data we extract as JSON from the TheGym so it is easier to deal with.
@@ -8,7 +9,7 @@ import java.time.LocalDate;
  * @author Dean
  *
  */
-public class GymSession {
+public class GymSession implements Comparable<GymSession> {
 
 	private long timeSpentAtGym;
 	private LocalDate dateAtGym;
@@ -31,5 +32,11 @@ public class GymSession {
 		String str = "Time Spent : " + timeSpentAtGym + "\n" +
 						"Date at gym : " + dateAtGym;
 		return str;
+	}
+
+
+	@Override
+	public int compareTo(GymSession o) {
+		return Period.between(o.getDateAtGym(), dateAtGym).getDays();
 	}
 }
