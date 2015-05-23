@@ -11,15 +11,29 @@ Scrapes information from TheGym website and returns gym usage info. Some of the 
 
 This should provide a neat interface that can plugin into and be used by other projects easily and take care of extracting the data and information, allowing the projects to do more interesting things like visualize the data, add leaderboards etc.
 
-# API
+# How to use/API
 
-Use the GymUsageData class which implements IGymUsageData and provides the following API
+Use the GymUsageData class which implements IGymUsageData and provides the following API:
 
 * long getTotalNumOfSessions();
 *	double getAverageNumOfSessionsPerWeek();
 *	double getAverageNumOfSessionsPerMonth();
 *	double getAverageSessionLength();
 *	List<GymSession> getGymSessions();
+*	void reload(IScrape scrape);
+
+Simply construct a GymUsageData(IScrape scrape) object, and pass in a scraping implemention. So far this project uses [JSoup] (http://jsoup.org/) in the form of the SoupScrape() class, but if you would like to use your own scraping implemention just make it implement IScrape and pass it in instead. 
+
+You can refresh the latest data by calling reload(IScrape scrape).
+
+Example:
+
+```
+String username = "bob@Gmail.com";
+String password = "12345678";
+IGymUsageData gymUsageData = new GymUsageData(new SoupCrape(username, password));
+long numOfSessions = gymUsageData.getTotalNumOfSessions();
+```
 
 # Build
 
