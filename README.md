@@ -31,7 +31,7 @@ Example:
 ```
 String username = "bob@Gmail.com";
 String password = "12345678";
-IGymUsageData gymUsageData = new GymUsageData(new SoupCrape(username, password));
+IGymUsageData gymUsageData = new GymUsageData(new SoupScrape(username, password));
 long numOfSessions = gymUsageData.getTotalNumOfSessions();
 ```
 
