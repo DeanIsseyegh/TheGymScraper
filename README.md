@@ -14,3 +14,7 @@ The build uses maven and java 1.8. Simply clone the repo and import the project 
 # Running from the command line
 
 You can run the project directly from the command line/eclipse by sending it two arguments - 1. email 2. pin.
+
+# Technologies
+
+This project makes use of [JSoup] (http://jsoup.org/) to scrape data from TheGym's site. 
