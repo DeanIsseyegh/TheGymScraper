@@ -1,6 +1,8 @@
 package com.dean.TheGymScraper.scrapers;
 
-import javax.json.JsonObject;
+import java.util.List;
+
+import com.dean.TheGymScraper.gymdata.GymSession;
 
 /**
  * Interface responsible for scraping information about a users gym usage from TheGym. Decoupled
@@ -11,6 +13,6 @@ import javax.json.JsonObject;
  */
 public interface IScrape {
 
-	JsonObject scrapeGymUsage();
+	List<GymSession> scrapeGymUsage();
 	
 }
