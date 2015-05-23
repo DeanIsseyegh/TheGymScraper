@@ -23,6 +23,6 @@ public class App
 		System.out.println("Successfully scraped...");
 		List<GymSession> gymSessions = scrape.scrapeGymUsage();
 		GymUsageData gymUsageData = new GymUsageData(gymSessions);
-		System.out.println(gymUsageData.calcNumOfSessions());
+		System.out.println(gymUsageData.getTotalNumOfSessions());
 	}
 }

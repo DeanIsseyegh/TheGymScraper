@@ -10,7 +10,7 @@ import java.util.List;
  * @author Dean
  *
  */
-public class GymUsageData {
+public class GymUsageData implements IGymUsageData {
 
 	List<GymSession> gymSessions = new ArrayList<>();
 
@@ -18,11 +18,32 @@ public class GymUsageData {
 		this.gymSessions = gymSessions;
 	}
 
-	public long calcNumOfSessions() {
+	@Override
+	public List<GymSession> getGymSessions() {
+		return gymSessions;
+	}
+	
+	@Override
+	public long getTotalNumOfSessions() {
 		return gymSessions.size();
 	}
 
-	public List<GymSession> getGymSessions() {
-		return gymSessions;
+
+	@Override
+	public double getAverageNumOfSessionsPerWeek() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getAverageNumOfSessionsPerMonth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getAverageSessionLength() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
