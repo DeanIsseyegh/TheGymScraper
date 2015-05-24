@@ -65,7 +65,7 @@
 					<repositoryName>TheGymScraper</repositoryName>
 					<!-- github username -->
 					<repositoryOwner>DeanIsseyegh</repositoryOwner>
-								<email>issdea@gmail.com</email>
+					<email>issdea@gmail.com</email>
 				</configuration>
 				<executions>
 					<execution>
