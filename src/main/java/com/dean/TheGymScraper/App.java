@@ -19,9 +19,6 @@ public class App
 		IScrape scrape = new SoupScrape(userName, password);
 		System.out.println("Successfully scraped...");
 		GymUsageData gymUsageData = new GymUsageData(scrape);
-		
-		System.out.println("Days since first/last session : " + gymUsageData.getDaysSinceFirstAndLastSession());
-		System.out.println("Average num of sessions per week : " + gymUsageData.getAverageNumOfSessionsPerWeek());
-		System.out.println("Total number of sessions : " + gymUsageData.getTotalNumOfSessions());
+		System.out.println("\n" + gymUsageData);
 	}
 }

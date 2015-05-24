@@ -1,6 +1,7 @@
 package com.dean.TheGymScraper.gymdata;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +19,9 @@ import com.dean.TheGymScraper.scrapers.IScrape;
 public class GymUsageData implements IGymUsageData {
 
 	List<GymSession> gymSessions = new ArrayList<>();
+	private LocalDate firstSessionDate;
+	private LocalDate lastSessionDate;
+
 
 	public GymUsageData(IScrape scrape) {
 		reload(scrape);
@@ -28,6 +32,14 @@ public class GymUsageData implements IGymUsageData {
 		return gymSessions;
 	}
 	
+	public LocalDate getFirstSessionDate() {
+		return firstSessionDate;
+	}
+	
+	public LocalDate getLastSessionDate() {
+		return lastSessionDate;
+	}
+	
 	@Override
 	public long getTotalNumOfSessions() {
 		return gymSessions.size();
@@ -35,15 +47,24 @@ public class GymUsageData implements IGymUsageData {
 
 	@Override
 	public long getDaysSinceFirstAndLastSession() {
-		LocalDate firstGymSession = gymSessions.get(0).getDateAtGym();
-		LocalDate lastGymSession = gymSessions.get(gymSessions.size() - 1).getDateAtGym();
-		return ChronoUnit.DAYS.between(firstGymSession, lastGymSession);
+		return ChronoUnit.DAYS.between(firstSessionDate, lastSessionDate);
 	}
 
+	@Override
 	public long getDaysSinceFirstSessionAndNow() {
-		LocalDate firstGymSession = gymSessions.get(0).getDateAtGym();
-		return ChronoUnit.DAYS.between(firstGymSession, LocalDate.now());
+		return ChronoUnit.DAYS.between(firstSessionDate, LocalDate.now());
 	}
+	
+	@Override
+	public Period getPeriodBetweenFirstAndLastSession() {
+		return Period.between(firstSessionDate, lastSessionDate);
+	}
+
+	@Override
+	public Period getPeriodBetweenFirstSessionAndNow() {
+		return Period.between(firstSessionDate, LocalDate.now());
+	}
+
 	
 	@Override
 	public double getAverageNumOfSessionsPerWeek() {
@@ -65,20 +86,41 @@ public class GymUsageData implements IGymUsageData {
 
 	@Override
 	public double getAverageNumOfSessionsPerMonth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getAverageNumOfSessionsPerWeek() * 4;
+	}
+	
+	@Override
+	public double getTotalSessionLengthMins() {
+		double totalSessionsLength = 0;
+		for (GymSession session : gymSessions) {
+			totalSessionsLength += session.getTimeSpentAtGym();
+		}
+		return totalSessionsLength;
 	}
 
 	@Override
-	public double getAverageSessionLength() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getAverageSessionLengthMins() {
+		return getTotalSessionLengthMins()/gymSessions.size();
 	}
 
 	@Override
 	public void reload(IScrape scrape) {
 		this.gymSessions = scrape.scrapeGymUsage();
 		Collections.sort(gymSessions);
+		firstSessionDate = gymSessions.get(0).getDateAtGym();
+		lastSessionDate = gymSessions.get(gymSessions.size() - 1).getDateAtGym();
+	}
+	
+	public String toString() {
+		return "Total Number Of Sessions : " + getTotalNumOfSessions() +
+				"\nFirst session date : " + getFirstSessionDate() +
+				"\nLast session date : " + getLastSessionDate() +
+				"\nDays since first and last session : " + getDaysSinceFirstAndLastSession() +
+				"\nDays since first session and now : " + getDaysSinceFirstSessionAndNow() +
+				"\nAverage num of sessions per week : " + getAverageNumOfSessionsPerWeek() +
+				"\nAverage num of sessions per month : " + getAverageNumOfSessionsPerMonth() +
+				"\nTotal session length : " + getTotalSessionLengthMins() +
+				"\nAverage session length : " + getAverageSessionLengthMins();
 	}
 
 }
