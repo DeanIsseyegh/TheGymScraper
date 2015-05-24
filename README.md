@@ -11,7 +11,36 @@ Scrapes information from TheGym website and returns gym usage info. Some of the 
 
 This should provide a neat interface that can plugin into and be used by other projects easily and take care of extracting the data and information, allowing the projects to do more interesting things like visualize the data, add leaderboards etc.
 
-# How to use/API
+# How to use
+
+A [maven repo branch exists](https://github.com/DeanIsseyegh/TheGymScraper/tree/mvn-repo). If you want to add this jar as part of your project, add the following into your ~/.m2/settings.xml
+
+```
+<repositories>
+    <repository>
+        <id>TheGymScraper-mvn-repo</id>
+        <url>https://github.com/DeanIsseyegh/TheGymScraper/tree/mvn-repo</url>
+        <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+        </snapshots>
+    </repository>
+</repositories>
+```
+
+And then to your pom.xml
+
+```
+<dependencies>
+		<dependency>
+			<groupId>com.dean</groupId>
+			<artifactId>TheGymScraper</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+```
+
+# API
 
 Use the GymUsageData class which implements IGymUsageData and provides the following API:
 
